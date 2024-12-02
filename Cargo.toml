@@ -8,7 +8,7 @@ edition = "2021"
 authors = ["Junzhuo <zhou@junzhuo.site>"]
 keywords = ["match"]
 readme = "README.md"
-repository = "https://github.com/zao111222333/hashmatch-db/"
+repository = "https://github.com/zao111222333/hashmatch/"
 documentation = "https://docs.rs/hashmatch"
 categories = ["development-tools"]
 description = "More efficient `static &str` matching when match #arm > 30."
@@ -31,8 +31,7 @@ foldhash = "0.1"
 
 [dependencies]
 foldhash.workspace = true
-hashmatch_macro = "0.1.1"
-plotters = "0.3.7"
+hashmatch_macro = "0.1.2"
 # hashmatch_macro = { path = "macro"}
 
 [build-dependencies]
@@ -43,7 +42,7 @@ syn = { version = "1.0", features = ["full"] }
 
 [dev-dependencies]
 serde_json = "1.0"
-plotly = { version = "0.10.0", features = ["kaleido"] }
+plotters = "0.3.7"
 chrono = "0.4"
 sysinfo = "0.32"
 criterion = "0.4"
