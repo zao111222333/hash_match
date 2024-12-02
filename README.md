@@ -40,7 +40,10 @@ For current rustc, the string matching with large arm number is linear complexit
 **But there is a potential risk when encounter DOS attacks.**
 
 ## Benchmark
-![](bench.svg)
+Platform: amd64
+![](bench_amd64.svg)
+Platform: arm64
+![](bench_arm64.svg)
 
 You can run the benchmark in your environment by `cargo bench`, requiring ~20min.
 
