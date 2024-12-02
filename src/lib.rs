@@ -1,21 +1,35 @@
-#[expect(dead_code)]
-mod demo_bench_5;
+//! Using hash-match for efficiency when #arm larger than 40.
+//! ```
+//! use hashmatch::{hash_arm, hash_str};
+//! // to avoid hash conflict
+//! #[deny(unreachable_patterns)]
+//! let res = match hash_str("ABC") {
+//!     hash_arm!("ABC") => 1,
+//!     hash_arm!("AAA") | hash_arm!("BBB") => 2,
+//!     _ => 3,
+//! };
+//! assert_eq!(res, 1);
+//! ```
 
-include!(concat!(env!("OUT_DIR"), "/codegen.rs"));
+pub use hashmatch_macro::hash_arm;
 
-pub const BENCHS: &[(usize, fn())] = &[
-    (5, bench_5::benches),
-    (10, bench_10::benches),
-    (15, bench_15::benches),
-    (20, bench_20::benches),
-    (35, bench_35::benches),
-    (50, bench_50::benches),
-    (75, bench_75::benches),
-    (100, bench_100::benches),
-    (200, bench_200::benches),
-    (500, bench_500::benches),
-    (1000, bench_1000::benches),
-    (2000, bench_2000::benches),
-    (5000, bench_5000::benches),
-    (10000, bench_10000::benches),
-];
+const HASHER: foldhash::fast::FixedState = foldhash::fast::FixedState::with_seed(41);
+#[inline]
+pub fn hash_str<S: AsRef<str>>(t: S) -> u64 {
+    use std::hash::{BuildHasher, Hash, Hasher};
+    let mut hasher = HASHER.build_hasher();
+    t.as_ref().hash(&mut hasher);
+    hasher.finish()
+}
+
+#[test]
+fn demo() {
+    // to avoid hash conflict
+    #[deny(unreachable_patterns)]
+    let res = match hash_str("ABC") {
+        hash_arm!("ABC") => 1,
+        hash_arm!("AAA") | hash_arm!("BBB") => 2,
+        _ => 3,
+    };
+    assert_eq!(res, 1);
+}
