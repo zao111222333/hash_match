@@ -2,7 +2,7 @@
 members = ["macro"]
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 license = "MIT"
 edition = "2021"
 authors = ["Junzhuo <zhou@junzhuo.site>"]
@@ -31,5 +31,5 @@ foldhash = "0.1"
 
 [dependencies]
 foldhash.workspace = true
-hashmatch_macro = "0.1.0"
+hashmatch_macro = "0.1.1"
 # hashmatch_macro = { path = "macro"}

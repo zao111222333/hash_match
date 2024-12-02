@@ -1,4 +1,4 @@
-//! Using hash-match for efficiency when #arm larger than 40.
+//! More efficient static &str match when #arm > 40.
 //! ```
 //! use hashmatch::{hash_arm, hash_str};
 //! // to avoid hash conflict
@@ -14,6 +14,7 @@
 pub use hashmatch_macro::hash_arm;
 
 const HASHER: foldhash::fast::FixedState = foldhash::fast::FixedState::with_seed(41);
+/// Runtime hash with consistency of `hash_arm!` (`hash_arm!` is compling time)
 #[inline]
 pub fn hash_str<S: AsRef<str>>(t: S) -> u64 {
     use std::hash::{BuildHasher, Hash, Hasher};
