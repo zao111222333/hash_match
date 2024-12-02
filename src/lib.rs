@@ -1,4 +1,4 @@
-//! More efficient static &str match when #arm > 40.
+//! More efficient `static &str` matching when match #arm > 30.
 //! ```
 //! use hashmatch::{hash_arm, hash_str};
 //! // to avoid hash conflict

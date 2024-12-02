@@ -2,7 +2,7 @@
 members = ["macro"]
 
 [workspace.package]
-version = "0.1.1"
+version = "0.1.2"
 license = "MIT"
 edition = "2021"
 authors = ["Junzhuo <zhou@junzhuo.site>"]
@@ -11,7 +11,7 @@ readme = "README.md"
 repository = "https://github.com/zao111222333/hashmatch-db/"
 documentation = "https://docs.rs/hashmatch"
 categories = ["development-tools"]
-description = "More efficient static &str match when #arm > 40."
+description = "More efficient `static &str` matching when match #arm > 30."
 
 [package]
 name = "hashmatch"
@@ -32,4 +32,23 @@ foldhash = "0.1"
 [dependencies]
 foldhash.workspace = true
 hashmatch_macro = "0.1.1"
+plotters = "0.3.7"
 # hashmatch_macro = { path = "macro"}
+
+[build-dependencies]
+rand = "0.8"
+proc-macro2 = "1.0"
+quote = "1.0"
+syn = { version = "1.0", features = ["full"] }
+
+[dev-dependencies]
+serde_json = "1.0"
+plotly = { version = "0.10.0", features = ["kaleido"] }
+chrono = "0.4"
+sysinfo = "0.32"
+criterion = "0.4"
+phf = { version = "0.11", features = ["macros"] }
+
+[[bench]]
+name = "bench"
+harness = false
